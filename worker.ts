@@ -39,9 +39,34 @@ export default {
       );
     }
 
-    // Build Obsidian URI and redirect
+    // Build Obsidian URI
     const obsidianUrl = `obsidian://open?vault=${encodeURIComponent(vault)}&file=${encodeURIComponent(file)}`;
 
-    return Response.redirect(obsidianUrl, 302);
+    // Return HTML that opens Obsidian and tries to close the tab
+    const html = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Opening Obsidian...</title>
+  <style>
+    body { font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #1a1a1a; color: #888; }
+    .message { text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="message">
+    <p>Opening in Obsidian...</p>
+    <p><small>You can close this tab</small></p>
+  </div>
+  <script>
+    window.location.href = "${obsidianUrl}";
+    setTimeout(() => { window.close(); }, 500);
+  </script>
+</body>
+</html>`;
+
+    return new Response(html, {
+      headers: { 'Content-Type': 'text/html' }
+    });
   }
 };
