@@ -1,0 +1,21 @@
+{
+  "name": "obsidian-redirect",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker to redirect URLs to Obsidian vault URIs",
+  "main": "worker.js",
+  "private": false,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "obsidian"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "wrangler": "^3.114.17"
+  }
+}
