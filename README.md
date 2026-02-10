@@ -74,12 +74,6 @@ bun install
 bun run dev
 ```
 
-## Security
-
-- No secrets are stored in the repository
-- Cloudflare API token is stored as a GitHub secret
-- API token has minimal permissions (Workers deployment only)
-
 ## License
 
 Apache-2.0
