@@ -44,15 +44,20 @@ export default {
 
     // Return HTML that opens Obsidian and tries to close the tab
     const html = `<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8">
   <title>Opening Obsidian...</title>
-  <style>body{line-height:1.5;font-size:18px;padding:0 10px;margin:50px auto;max-width:650px;text-align:center}</style>
+  <style>
+    body { font-family: system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #1a1a1a; color: #888; }
+    .message { text-align: center; }
+  </style>
 </head>
 <body>
-  <p>Opening in Obsidian...</p>
-  <p>You can close this tab</p>
+  <div class="message">
+    <p>Opening in Obsidian...</p>
+    <p><small>You can close this tab</small></p>
+  </div>
   <script>
     window.location.href = "${obsidianUrl}";
     setTimeout(() => { window.close(); }, 500);
