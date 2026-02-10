@@ -24,25 +24,11 @@ obsidian://open?vault=vault&file=path/to/note
 
 ## Deployment
 
-This project uses GitHub Actions for automatic deployment to Cloudflare Workers.
+This project uses Cloudflare's built-in GitHub integration for automatic deployments.
 
 ### Initial Setup
 
-1. **Create a Cloudflare API Token**:
-   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com/profile/api-tokens)
-   - Click "Create Token"
-   - Use the "Edit Cloudflare Workers" template
-   - Scope it to your account and the specific zone (skg.gg)
-   - Copy the token
-
-2. **Add GitHub Secret**:
-   - Go to your GitHub repository settings
-   - Navigate to Secrets and variables → Actions
-   - Click "New repository secret"
-   - Name: `CLOUDFLARE_API_TOKEN`
-   - Value: Paste your Cloudflare API token
-
-3. **Configure DNS** (if not already set up):
+1. **Configure DNS** (if not already set up):
    - In Cloudflare Dashboard → DNS
    - Add an AAAA record:
      - Type: `AAAA`
@@ -50,17 +36,20 @@ This project uses GitHub Actions for automatic deployment to Cloudflare Workers.
      - Content: `100::`
      - Proxied: Yes
 
-4. **Push to GitHub**:
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git remote add origin git@github.com:yourusername/obsidian-redirect.git
-   git push -u origin main
-   ```
+2. **Link GitHub Repository**:
+   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com/)
+   - Navigate to Workers & Pages
+   - Click "Create Application" → "Pages" → "Connect to Git"
+   - Select your GitHub repository
+   - Configure build settings:
+     - Framework preset: None
+     - Build command: (leave empty)
+     - Build output directory: (leave empty)
+   - Click "Save and Deploy"
 
 ### Automatic Deployment
 
-Once configured, any push to the `main` or `master` branch will automatically deploy to Cloudflare Workers via GitHub Actions.
+Once configured, any push to your repository will automatically trigger a deployment to Cloudflare Workers.
 
 ### Manual Deployment
 
