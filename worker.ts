@@ -5,8 +5,10 @@
  * Redirects to: obsidian://open?vault=vault&file=path/to/note
  */
 
+export interface Env {}
+
 export default {
-  async fetch(request) {
+  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
     const path = decodeURIComponent(url.pathname.slice(1)); // Remove leading slash and decode
 
