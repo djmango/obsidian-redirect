@@ -48,12 +48,28 @@ export default {
 <head>
   <meta charset="utf-8">
   <title>Opening Obsidian...</title>
-  <style>body{line-height:1.5;font-size:18px;padding:0 10px;margin:50px auto;max-width:650px;text-align:center}</style>
+  <style>body{margin:0;background:#000;color:#0f0;font:18px monospace;display:flex;justify-content:center;align-items:center;height:100vh}</style>
 </head>
 <body>
   <p>Opening in Obsidian...</p>
-  <p>You can close this tab</p>
   <script>
+    const c = document.createElement('canvas');
+    Object.assign(c.style, {position:'fixed',top:0,left:0,zIndex:-1,opacity:'0.05'});
+    c.width = innerWidth; c.height = innerHeight;
+    document.body.appendChild(c);
+    const ctx = c.getContext('2d');
+    const cols = Math.floor(c.width/14);
+    const drops = Array(cols).fill(0);
+    setInterval(() => {
+      ctx.fillStyle = 'rgba(0,0,0,0.05)';
+      ctx.fillRect(0,0,c.width,c.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = '14px monospace';
+      drops.forEach((y,i) => {
+        ctx.fillText(String.fromCharCode(0x30A0+Math.random()*96), i*14, y*14);
+        drops[i] = y > c.height/14 + Math.random()*1e4 ? 0 : y+1;
+      });
+    }, 50);
     window.location.href = "${obsidianUrl}";
     setTimeout(() => { window.close(); }, 500);
   </script>
